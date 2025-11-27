@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+use Exception;
 
 class KategoriController extends Controller
 {
@@ -11,7 +13,12 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
+        $kategori = Kategori::orderBy('nama_kategori', 'asc')->get();
+        return view('backend.v_kategori.index', [
+        'judul' => 'Kategori',
+        'index' => $kategori
+]);
+
     }
 
     /**
@@ -19,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.v_kategori.create', ['judul' => 'Kategori', ]);
     }
 
     /**
@@ -27,7 +34,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        try {
+            $validatedData = $request->validate([
+            'nama_kategori' => 'required|max:255|unique:kategori'
+            ]);
+            Kategori::create($validatedData);
+        } catch (Exception $e) {
+            throw new Exception( $e->getMessage());
+        }
+
+
+        return redirect()->route('backend.kategori.index')->with('success', 'Data berhasil
+        tersimpan');
+
     }
 
     /**
@@ -43,7 +63,11 @@ class KategoriController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kategori = Kategori::find($id);
+        return view('backend.v_kategori.edit', [
+            'judul' => 'Kategori',
+            'edit' => $kategori
+            ]);
     }
 
     /**
@@ -51,7 +75,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rules = [
+        'nama_kategori' => 'required|max:255|unique:kategori,nama_kategori,' . $id,
+        ];
+        $validatedData = $request->validate($rules);
+        Kategori::where('id', $id)->update($validatedData);
+        return redirect()->route('backend.kategori.index')->with('success', 'Data berhasil
+        diperbaharui');
     }
 
     /**
@@ -59,6 +89,8 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+        return redirect()->route('backend.kategori.index')->with('success', 'Data berhasil dihapus');
     }
 }
