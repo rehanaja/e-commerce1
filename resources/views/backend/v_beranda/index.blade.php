@@ -2,29 +2,47 @@
 @section('content')
 <!-- contentAwal -->
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body border-top">
-                <h5 class="card-title"> {{$judul}}</h5>
-                <div class="alert alert-success" role="alert">
-                    <h4 class="alert-heading"> Selamat Datang, {{ Auth::user()->name }}</h4>
-                    Aplikasi Toko Online dengan hak akses yang anda miliki sebagai
-                    <b>
-                        @if (Auth::user()->role ==1)
-                        Super Admin
-                        @elseif(Auth::user()->role ==0)
-                        Admin
-                        @endif
-                    </b>
-                    ini adalah halaman utama dari aplikasi Web Programming. Studi Kasus Toko Online.
-                    <hr>
-                    <p class="mb-0">Kuliah..? BSI Aja !!!</p>
+<!-- STORE -->
+<div id="store">
+    <!-- row -->
+    <div class="row">
+        <!-- Product Single -->
+        @foreach ($produk as $row)
+         <div class="col-md-3 col-sm-5 col-xs-6">
+            <div class="product product-single">
+                <div class="product-thumb">
+                    <div class="product-label">
+                        <span>Kategori</span>
+                        <span class="sale">{{ $row->kategori->nama_kategori }}</span>
+                    </div>
+                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Detail Produk</button>
+                   <img src="{{ asset('storage/img-produk/thumb_md_' . $row->foto) }}">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-price">Rp. {{ number_format($row->harga, 0, ',', '.') }} <span class="product-old-price">{{ $row->kategori->nama_kategori }}</span></h3>
+                    <h2 class="product-name"><a href="#">{{ $row->nama_produk }}</a></h2>
+                    <div class="product-btns">
+                        <a href="#"title="Detail Produk">
+                            <button class='main-btn icon-btn'><i class="fa fa-search-plus"></i></button>
+                        </a>
+                        <form action="3" method="post" style="display: inline-block;" title="Pesan Ke Aplikasi">
+                            @csrf
+                        <button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i>Pesan</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+         </div>
+
+        @endforeach
+
+         <!-- /Product Single -->
+        <div class="clearfix visible-md visible-lg visible-sm visible-xs"></div>
     </div>
+     <!-- /row -->
 </div>
+<!-- /STORE -->
+
 
 <!-- contentAkhir -->
 @endsection

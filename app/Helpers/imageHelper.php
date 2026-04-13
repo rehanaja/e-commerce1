@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helpers;
 
 class imageHelper
@@ -30,12 +31,12 @@ class imageHelper
             $oldWidth = imagesx($image);
             $oldHeight = imagesy($image);
             $aspectRatio = $oldWidth / $oldHeight;
-            if (!$height) {
+            if (! $height) {
                 $height = $width / $aspectRatio; // Hitung tinggi dengan mempertahankan aspek rasio
-                }
+            }
             $newImage = imagecreatetruecolor($width, $height);
             imagecopyresampled($newImage, $image, 0, 0, 0, 0, $width, $height, $oldWidth,
-$oldHeight);
+                $oldHeight);
             imagedestroy($image);
             $image = $newImage;
         }
@@ -44,17 +45,18 @@ $oldHeight);
         switch ($extension) {
             case 'jpeg':
             case 'jpg':
-                imagejpeg($image, $destinationPath . '/' . $fileName);
+                imagejpeg($image, $destinationPath.'/'.$fileName);
                 break;
             case 'png':
-                imagepng($image, $destinationPath . '/' . $fileName);
+                imagepng($image, $destinationPath.'/'.$fileName);
                 break;
             case 'gif':
-                imagegif($image, $destinationPath . '/' . $fileName);
+                imagegif($image, $destinationPath.'/'.$fileName);
                 break;
         }
 
         imagedestroy($image);
+
         return $fileName;
     }
 }
