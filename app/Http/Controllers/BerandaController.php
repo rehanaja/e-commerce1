@@ -2,18 +2,14 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
 use App\Models\Produk;
 
-=======
->>>>>>> 0b30345 (test)
 class BerandaController extends Controller
 {
     public function berandaBackend()
     {
         return view('v_beranda.index', [
             'judul' => 'Halaman Beranda',
-<<<<<<< HEAD
         ]);
     }
 
@@ -24,8 +20,6 @@ class BerandaController extends Controller
         return view('v_beranda.index', [
             'judul' => 'Halaman beranda',
             'produk' => $produk,
-=======
->>>>>>> 0b30345 (test)
         ]);
     }
 }
