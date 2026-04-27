@@ -1,4 +1,4 @@
-@extends('backend.v_layouts.app')
+@extends('v_layouts.app')
 @section('content')
 <!-- contentAwal -->
 
@@ -15,14 +15,17 @@
                         <span>Kategori</span>
                         <span class="sale">{{ $row->kategori->nama_kategori }}</span>
                     </div>
-                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Detail Produk</button>
+                    <a href="{{ route('produk.detail', $row->id) }}">
+                        <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Detail Produk</button>
+                    </a>
+
                    <img src="{{ asset('storage/img-produk/thumb_md_' . $row->foto) }}">
                 </div>
                 <div class="product-body">
                     <h3 class="product-price">Rp. {{ number_format($row->harga, 0, ',', '.') }} <span class="product-old-price">{{ $row->kategori->nama_kategori }}</span></h3>
                     <h2 class="product-name"><a href="#">{{ $row->nama_produk }}</a></h2>
                     <div class="product-btns">
-                        <a href="#"title="Detail Produk">
+                        <a href="{{ route('produk.detail', $row->id) }}"title="Detail Produk">
                             <button class='main-btn icon-btn'><i class="fa fa-search-plus"></i></button>
                         </a>
                         <form action="3" method="post" style="display: inline-block;" title="Pesan Ke Aplikasi">

@@ -8,7 +8,7 @@ class BerandaController extends Controller
 {
     public function berandaBackend()
     {
-        return view('backend.v_beranda.index', [
+        return view('v_beranda.index', [
             'judul' => 'Halaman Beranda',
         ]);
     }
@@ -17,7 +17,7 @@ class BerandaController extends Controller
     {
         $produk = Produk::where('status', 1)->orderBy('updated_at', 'desc')->paginate(6);
 
-        return view('backend.v_beranda.index', [
+        return view('v_beranda.index', [
             'judul' => 'Halaman beranda',
             'produk' => $produk,
         ]);
