@@ -18,11 +18,11 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required',
+            'password' => 'required'
         ]);
 
         if (Auth::attempt($credentials)) {
-            if(Auth::user()->status == 0) {
+            if (Auth::user()->status == 0) {
                 Auth::logout();
                 return back()->with('error', 'User belum aktif');
             }
@@ -37,6 +37,7 @@ class LoginController extends Controller
         Auth::logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        return redirect(route('backend.login'));
+        return redirect()->route('backend.login')->with('success', 'Berhasil Keluar');
     }
+
 }

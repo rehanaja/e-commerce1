@@ -6,7 +6,7 @@
 <!-- STORE -->
 <div id="store">
     <!-- row -->
-    <div class="row">
+    <div class="row m-0 row-flex">
         <!-- Product Single -->
         @foreach ($produk as $row)
          <div class="col-md-3 col-sm-5 col-xs-6">
@@ -45,7 +45,7 @@
     </div>
     <div class="store-filter clearfix"> 
         <div class="pagination"> 
-            {{ $produk->links('vendor.pagination.custom') }} 
+            {{ $produk->links() }} 
         </div> 
     </div>
      <!-- /row -->

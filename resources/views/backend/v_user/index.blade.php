@@ -29,7 +29,7 @@
                             <tr> 
                                 <td> {{ $loop->iteration }} </td> 
                                 <td> {{$row->email}} </td> 
-                                <td> {{$row->name}} </td> 
+                                <td> {{$row->nama}} </td> 
                                 <td> 
                                     @if ($row->role == 1) 
                                     <span class="badge badge-success"></i> 
@@ -37,6 +37,9 @@
                                     @elseif($row->role == 0) 
                                     <span class="badge badge-primary"></i> 
                                         Admin</span> 
+                                    @elseif($row->role == 2) 
+                                    <span class="badge badge-dark"></i> 
+                                        Customer</span> 
                                     @endif 
                                 </td> 
                                 <td> 

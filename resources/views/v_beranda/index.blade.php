@@ -5,7 +5,7 @@
 <!-- STORE -->
 <div id="store">
     <!-- row -->
-    <div class="row">
+    <div class="row m-0 row-flex">
         <!-- Product Single -->
         @foreach ($produk as $row)
          <div class="col-md-3 col-sm-5 col-xs-6">
@@ -40,7 +40,7 @@
         @endforeach
 
          <!-- /Product Single -->
-        <div class="clearfix visible-md visible-lg visible-sm visible-xs"></div>
+        <div class="clearfix visible-xs-block"></div>
     </div>
      <!-- /row -->
 </div>
